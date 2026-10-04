@@ -80,24 +80,32 @@
             margin-bottom: 25px;
         }
 
-        h1 {
-            font-family: "Playfair Display", serif;
-            font-size: clamp(55px, 9vw, 115px);
-            line-height: .95;
-            margin-bottom: 25px;
-        }
+       h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(50px, 7vw, 100px);
+    line-height: .95;
+    margin-bottom: 25px;
 
+    /* KHÔNG CHO XUỐNG DÒNG */
+    white-space: nowrap;
+    width: max-content;
+    max-width: none;
+}
         h1 span {
             color: #ff9eb5;
         }
 
-        .hero-text {
-            font-size: 18px;
-            line-height: 1.8;
-            max-width: 650px;
-            margin: auto;
-            color: rgba(255,255,255,.85);
-        }
+        .hero-content {
+    position: relative;
+    z-index: 10;
+
+    max-width: 1400px;
+    width: 100%;
+
+    padding: 30px;
+
+    text-align: center;
+}
 
         .start-btn {
             display: inline-block;
