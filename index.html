@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,13 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -56,12 +61,13 @@
             content: "";
             position: absolute;
             inset: 0;
+
             background:
                 radial-gradient(
                     circle at center,
                     transparent 0%,
-                    rgba(0,0,0,.35) 55%,
-                    rgba(0,0,0,.7) 100%
+                    rgba(0, 0, 0, .35) 55%,
+                    rgba(0, 0, 0, .7) 100%
                 );
         }
 
@@ -96,25 +102,84 @@
             line-height: 1.8;
             max-width: 650px;
             margin: auto;
-            color: rgba(255,255,255,.85);
+            color: rgba(255, 255, 255, .85);
         }
 
         .start-btn {
             display: inline-block;
             margin-top: 40px;
             padding: 16px 32px;
+            border: none;
             border-radius: 100px;
             background: white;
             color: #101827;
             text-decoration: none;
+            font-family: "DM Sans", sans-serif;
+            font-size: 16px;
             font-weight: 700;
+            cursor: pointer;
             transition: .3s;
-            box-shadow: 0 10px 40px rgba(255,255,255,.2);
+            box-shadow: 0 10px 40px rgba(255, 255, 255, .2);
         }
 
         .start-btn:hover {
             transform: translateY(-5px);
             background: #ffb1c5;
+        }
+
+        /* =========================
+           MUSIC BUTTON
+        ========================= */
+
+        .music-control {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+
+            z-index: 100;
+
+            width: 52px;
+            height: 52px;
+
+            border: 1px solid rgba(255, 255, 255, .2);
+            border-radius: 50%;
+
+            background: rgba(10, 18, 32, .75);
+            backdrop-filter: blur(12px);
+
+            color: white;
+            font-size: 20px;
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+
+            transition: .3s;
+        }
+
+        .music-control:hover {
+            transform: scale(1.08);
+            background: rgba(255, 158, 181, .85);
+        }
+
+        .music-control.playing {
+            animation: musicPulse 1.5s infinite;
+        }
+
+        @keyframes musicPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 158, 181, .4);
+            }
+
+            50% {
+                box-shadow: 0 0 0 12px rgba(255, 158, 181, 0);
+            }
         }
 
         /* =========================
@@ -124,14 +189,18 @@
         .heart {
             position: fixed;
             bottom: -30px;
+
             font-size: 20px;
             opacity: .7;
+
             animation: floatUp linear forwards;
+
             pointer-events: none;
             z-index: 10;
         }
 
         @keyframes floatUp {
+
             0% {
                 transform: translateY(0) rotate(0deg);
                 opacity: 0;
@@ -154,13 +223,15 @@
         .message-section {
             min-height: 100vh;
             padding: 120px 25px;
+
             background:
                 radial-gradient(
                     circle at 20% 20%,
-                    rgba(255,140,170,.12),
+                    rgba(255, 140, 170, .12),
                     transparent 35%
                 ),
                 #08111f;
+
             display: flex;
             justify-content: center;
             align-items: center;
@@ -188,16 +259,19 @@
         .letter {
             padding: 45px;
             border-radius: 25px;
-            background: rgba(255,255,255,.06);
-            border: 1px solid rgba(255,255,255,.12);
+
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .12);
+
             backdrop-filter: blur(15px);
-            box-shadow: 0 30px 80px rgba(0,0,0,.25);
+
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .25);
         }
 
         .letter p {
             font-size: 18px;
             line-height: 2;
-            color: rgba(255,255,255,.84);
+            color: rgba(255, 255, 255, .84);
             margin-bottom: 22px;
         }
 
@@ -208,6 +282,7 @@
 
         .signature {
             margin-top: 35px;
+
             font-family: "Playfair Display", serif;
             font-size: 28px;
             color: white;
@@ -230,6 +305,7 @@
 
         .cards {
             margin-top: 60px;
+
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
@@ -237,15 +313,18 @@
 
         .card {
             padding: 35px 20px;
+
             border-radius: 22px;
-            background: rgba(255,255,255,.05);
-            border: 1px solid rgba(255,255,255,.08);
+
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .08);
+
             transition: .3s;
         }
 
         .card:hover {
             transform: translateY(-8px);
-            background: rgba(255,255,255,.08);
+            background: rgba(255, 255, 255, .08);
         }
 
         .card-icon {
@@ -259,7 +338,7 @@
         }
 
         .card p {
-            color: rgba(255,255,255,.6);
+            color: rgba(255, 255, 255, .6);
             font-size: 14px;
             line-height: 1.7;
         }
@@ -270,16 +349,19 @@
 
         .final {
             min-height: 80vh;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             text-align: center;
+
             padding: 80px 25px;
 
             background:
                 linear-gradient(
-                    rgba(5,12,23,.55),
-                    rgba(5,12,23,.9)
+                    rgba(5, 12, 23, .55),
+                    rgba(5, 12, 23, .9)
                 ),
                 url("https://images.unsplash.com/photo-1508964942454-1a56651d54ac?auto=format&fit=crop&w=2000&q=90");
 
@@ -300,17 +382,20 @@
         .final p {
             font-size: 19px;
             line-height: 1.9;
-            color: rgba(255,255,255,.8);
+            color: rgba(255, 255, 255, .8);
         }
 
         .big-heart {
             font-size: 65px;
             margin-top: 35px;
+
             animation: heartbeat 1.4s infinite;
         }
 
         @keyframes heartbeat {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
             }
 
@@ -319,11 +404,18 @@
             }
         }
 
+        /* =========================
+           FOOTER
+        ========================= */
+
         footer {
             padding: 30px;
             text-align: center;
+
             background: #050b14;
-            color: rgba(255,255,255,.35);
+
+            color: rgba(255, 255, 255, .35);
+
             font-size: 13px;
         }
 
@@ -363,11 +455,43 @@
             .start-btn {
                 padding: 14px 26px;
             }
+
+            .music-control {
+                width: 46px;
+                height: 46px;
+                right: 15px;
+                bottom: 15px;
+            }
         }
+
     </style>
 </head>
 
+
 <body>
+
+
+    <!-- =========================
+         BACKGROUND MUSIC
+    ========================= -->
+
+    <audio id="bgMusic" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+        Trình duyệt của bạn không hỗ trợ phát nhạc.
+    </audio>
+
+
+    <!-- =========================
+         MUSIC CONTROL
+    ========================= -->
+
+    <button
+        class="music-control"
+        id="musicControl"
+        aria-label="Bật hoặc tắt nhạc">
+        🎵
+    </button>
+
 
     <!-- =========================
          HERO
@@ -382,7 +506,8 @@
             </div>
 
             <h1>
-                Good luck, my love.</span> ❤️
+                Good luck,
+                <span>my love.</span> ❤️
             </h1>
 
             <p class="hero-text">
@@ -390,9 +515,9 @@
                 trong những ngày thực tập tại Singapore.
             </p>
 
-            <a href="#message" class="start-btn">
+            <button class="start-btn" id="startButton">
                 Open my message ❤️
-            </a>
+            </button>
 
         </div>
 
@@ -419,42 +544,89 @@
 
                 <p>
                     Vậy là em sắp bắt đầu một hành trình mới
-                    ở Singapore rồi. Xin chúc mừng nàng yêu của anh
+                    ở Singapore rồi. Xin chúc mừng nàng yêu của anh.
                     Một hành trình dài vừa háo hức, vừa có một chút
                     lo lắng.
                 </p>
 
+
                 <p>
                     Nhưng mà em đừng lo nhé. Sau tất cả,
                     em đã cố gắng rất nhiều để có được cơ hội này,
-                    từ làm lại thẻ căn cước công dân, giấy tờ visa, thủ tục,....
-                    Nhưng nhờ đó cũng đã làm cho con người em yêu trở nên giày dặn và cứng cỏi hơn rất nhiều (anh rất yêu chuyến đi về 		    hạ long làm lại cccd hihi)
-                    Chúng mình đã có khoảng thời gian tuyệt vời bên nhau giờ đây đã đến lúc em có thể đi xa hơn rồi anh rất tự hào và 	            vui mừng cho em đó hãy tận dụng thật tốt cơ hội này nhé nó sẽ là bước ngoặt đối với em đó nàng yêu anh tin chắc là 		    vậy
+                    từ làm lại thẻ căn cước công dân, giấy tờ visa,
+                    thủ tục,....
+                    Nhưng nhờ đó cũng đã làm cho con người em yêu
+                    trở nên giày dặn và cứng cỏi hơn rất nhiều
+                    (anh rất yêu chuyến đi về Hạ Long làm lại CCCD hihi).
                 </p>
+
+
+                <p>
+                    Chúng mình đã có khoảng thời gian tuyệt vời
+                    bên nhau. Giờ đây đã đến lúc em có thể đi xa hơn rồi.
+                    Anh rất tự hào và vui mừng cho em đó nàng yêu.
+                    Anh mong em hãy tận dụng thật tốt cơ hội này nhé.
+                    Nó sẽ là bước ngoặt đối với em đó.
+                    Nàng yêu, anh tin chắc là vậy.
+                </p>
+
 
                 <p>
                     Có thể sẽ có những ngày mệt,
-                    có những lúc nhớ nhà và trên hết là phải nhớ anh đó nhé
+                    có những lúc nhớ nhà và trên hết là phải nhớ anh đó nhé,
                     hoặc có những chuyện không diễn ra
                     đúng như em mong muốn.
+                </p>
+
+
+                <p>
                     Nhưng mỗi khi như thế,
-                    hãy nhớ rằng đôi khi trở ngại không nằm trên con đường ngáng chân em đi mà chính những trở ngại, những khó khăn ấy 		    sẽ trở thành con đường mà em sẽ bước tiếp nó yêu cầu em phải cứng cỏi hơn, rắn rỏi hơn nữa anh mong rằng em có thể 		    mạnh mẽ mà bước trên con đường đó và nhớ rằng ở đằng sau vẫn luôn có anh và bạn bè nhìn Hiển hôm chia tay mà xem 		    làm việc cả tối nhưng đến lúc về trông như sắp khóc =))) hehe anh và mọi người yêu quý và trân trọng em rất nhiều 		    đó bé. Mọi người luôn ủng hộ em,
+                    hãy nhớ rằng đôi khi trở ngại không nằm trên con đường
+                    ngáng chân em đi mà chính những trở ngại,
+                    những khó khăn ấy sẽ trở thành con đường mà em sẽ bước tiếp.
+                    Nó yêu cầu em phải cứng cỏi hơn, rắn rỏi hơn nữa.
+                    Anh mong rằng em có thể mạnh mẽ mà bước trên con đường đó.
+                </p>
+
+
+                <p>
+                    Và nhớ rằng ở đằng sau vẫn luôn có anh
+                    và bạn bè nhìn Hiển hôm chia tay mà xem.
+                    Làm việc cả tối nhưng đến lúc về trông như sắp khóc =)))
+                    Hehe.
+                    Anh và mọi người yêu quý và trân trọng em rất nhiều đó bé.
+                    Mọi người luôn ủng hộ em,
                     tin em và nhớ em rất nhiều.
                 </p>
 
+
                 <p>
-                    Anh không cần em phải kiếm được nhiều tiền hay về đi mua sắm hay haidilao gì cả hãy về và đem theo mình những câu 	            truyện thực tế em đã khó khăn và vượt qua ra sao em đã đối phó với ông khách khó tính như nào đối phó với sếp, đồng 		    nghiệp ra sao anh sẽ luôn ngưỡng mộ và tự hào vì em rất nhiều hehehehe. hoàn hảo.
+                    Anh không cần em phải kiếm được nhiều tiền
+                    hay về đi mua sắm hay Haidilao gì cả.
+                    Hãy về và đem theo mình những câu chuyện thực tế:
+                    em đã khó khăn và vượt qua ra sao,
+                    em đã đối phó với ông khách khó tính như nào,
+                    đối phó với sếp, đồng nghiệp ra sao.
+                    Anh sẽ luôn ngưỡng mộ và tự hào vì em rất nhiều hehehe.
+                </p>
+
+
+                <p>
                     Anh chỉ mong em luôn khỏe,
                     luôn vui và trở về sau chuyến đi này
                     với thật nhiều kỷ niệm đẹp và những bài học.
                 </p>
 
+
                 <p>
-                    Good luck with your internship, baby.
+                    <span class="highlight">
+                        Good luck with your internship, baby.
                     </span>
+                    <br>
                     Go show them what you can do.
                     Anh tin em. ❤️
                 </p>
+
 
                 <div class="signature">
                     Love,<br>
@@ -484,54 +656,81 @@
                 4 things I want for you
             </h2>
 
+
             <div class="cards">
 
-                <div class="card">
-                    <div class="card-icon">💼</div>
 
-                    <h3>Work hard</h3>
+                <div class="card">
+
+                    <div class="card-icon">
+                        💼
+                    </div>
+
+                    <h3>
+                        Work hard
+                    </h3>
 
                     <p>
                         Học hỏi thật nhiều và
                         tận dụng từng cơ hội.
                     </p>
+
                 </div>
 
 
                 <div class="card">
-                    <div class="card-icon">🫶</div>
 
-                    <h3>Stay healthy</h3>
+                    <div class="card-icon">
+                        🫶
+                    </div>
+
+                    <h3>
+                        Stay healthy
+                    </h3>
 
                     <p>
                         Nhớ ăn uống đầy đủ,
                         ngủ đủ và đừng làm việc quá sức.
                     </p>
+
                 </div>
 
 
                 <div class="card">
-                    <div class="card-icon">Enjoyment</div>
 
-                    <h3>Enjoy Singapore</h3>
+                    <div class="card-icon">
+                        🇸🇬
+                    </div>
+
+                    <h3>
+                        Enjoy Singapore
+                    </h3>
 
                     <p>
                         Đi khám phá, chụp thật nhiều ảnh
                         và tạo thật nhiều kỷ niệm.
                     </p>
+
                 </div>
 
 
                 <div class="card">
-                    <div class="card-icon">🏠</div>
 
-                    <h3>Come home safely</h3>
+                    <div class="card-icon">
+                        🏠
+                    </div>
+
+                    <h3>
+                        Come home safely
+                    </h3>
 
                     <p>
                         Điều quan trọng nhất:
                         đi thật vui và trở về thật bình an.
                     </p>
+
                 </div>
+
 
             </div>
 
@@ -571,16 +770,109 @@
     </section>
 
 
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
     <footer>
         Made with love, just for you. 🇻🇳 → 🇸🇬
     </footer>
 
 
     <!-- =========================
-         FLOATING HEARTS SCRIPT
+         JAVASCRIPT
     ========================= -->
 
     <script>
+
+        /* =========================
+           MUSIC
+        ========================= */
+
+        const bgMusic = document.getElementById("bgMusic");
+        const startButton = document.getElementById("startButton");
+        const musicControl = document.getElementById("musicControl");
+
+
+        let isPlaying = false;
+
+
+        /* =========================
+           START BUTTON
+        ========================= */
+
+        startButton.addEventListener("click", function () {
+
+            bgMusic.volume = 0.35;
+
+            bgMusic.play()
+                .then(() => {
+
+                    isPlaying = true;
+
+                    musicControl.classList.add("playing");
+
+                    musicControl.innerHTML = "🔊";
+
+                })
+                .catch((error) => {
+
+                    console.log("Music could not play:", error);
+
+                });
+
+
+            document.getElementById("message").scrollIntoView({
+                behavior: "smooth"
+            });
+
+        });
+
+
+        /* =========================
+           MUSIC ON / OFF BUTTON
+        ========================= */
+
+        musicControl.addEventListener("click", function () {
+
+            if (isPlaying) {
+
+                bgMusic.pause();
+
+                isPlaying = false;
+
+                musicControl.classList.remove("playing");
+
+                musicControl.innerHTML = "🔇";
+
+            } else {
+
+                bgMusic.volume = 0.35;
+
+                bgMusic.play()
+                    .then(() => {
+
+                        isPlaying = true;
+
+                        musicControl.classList.add("playing");
+
+                        musicControl.innerHTML = "🔊";
+
+                    })
+                    .catch((error) => {
+
+                        console.log("Music could not play:", error);
+
+                    });
+
+            }
+
+        });
+
+
+        /* =========================
+           FLOATING HEARTS
+        ========================= */
 
         function createHeart() {
 
@@ -588,30 +880,49 @@
 
             heart.className = "heart";
 
-            const hearts = ["❤️", "💕", "💗", "💖", "✨"];
+
+            const hearts = [
+                "❤️",
+                "💕",
+                "💗",
+                "💖",
+                "✨"
+            ];
+
 
             heart.innerHTML =
                 hearts[Math.floor(Math.random() * hearts.length)];
 
+
             heart.style.left =
                 Math.random() * 100 + "vw";
+
 
             heart.style.animationDuration =
                 (5 + Math.random() * 6) + "s";
 
+
             heart.style.fontSize =
                 (12 + Math.random() * 20) + "px";
 
+
             document.body.appendChild(heart);
 
+
             setTimeout(() => {
+
                 heart.remove();
+
             }, 12000);
+
         }
 
+
         setInterval(createHeart, 650);
+
 
     </script>
 
 </body>
+
 </html>
