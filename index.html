@@ -80,31 +80,32 @@
             margin-bottom: 25px;
         }
 h1 {
+    position: relative;
     font-family: "Playfair Display", serif;
     font-size: clamp(50px, 7vw, 100px);
     line-height: .95;
     margin: 0 auto 25px auto;
-    white-space: nowrap;
-    width: max-content;
+    width: 100%;
     max-width: none;
     text-align: center;
+    white-space: nowrap;
+}
+
+.hero-title-text {
+    display: inline-block;
+}
+
+.hero-title-heart {
+    position: absolute;
+    left: calc(50% + clamp(360px, 32vw, 470px));
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: Arial, sans-serif;
+    font-size: clamp(55px, 7vw, 100px);
 }
         h1 span {
             color: #ff9eb5;
         }
-
-        .hero-content {
-    position: relative;
-    z-index: 10;
-
-    max-width: 1400px;
-    width: 100%;
-
-    padding: 30px;
-
-    text-align: center;
-}
-
         .start-btn {
             display: inline-block;
             margin-top: 40px;
@@ -532,9 +533,10 @@ h1 {
                 The thing i want to send to my love
             </div>
 
-            <h1>
-                Good luck, my love. ❤️
-            </h1>
+           <h1>
+    <span class="hero-title-text">Good luck, my love.</span>
+    <span class="hero-title-heart">❤️</span>
+</h1>
 
             <p class="hero-text">
                 Chúc em có một hành trình thật đẹp
