@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>For My Love ❤️</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background: #08111f;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    rgba(4, 12, 25, 0.35),
+                    rgba(4, 12, 25, 0.85)
+                ),
+                url("https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=2000&q=90");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(
+                    circle at center,
+                    transparent 0%,
+                    rgba(0,0,0,.35) 55%,
+                    rgba(0,0,0,.7) 100%
+                );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            max-width: 850px;
+            padding: 30px;
+        }
+
+        .small-title {
+            font-size: 14px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            opacity: .8;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(55px, 9vw, 115px);
+            line-height: .95;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: #ff9eb5;
+        }
+
+        .hero-text {
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 650px;
+            margin: auto;
+            color: rgba(255,255,255,.85);
+        }
+
+        .start-btn {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 16px 32px;
+            border-radius: 100px;
+            background: white;
+            color: #101827;
+            text-decoration: none;
+            font-weight: 700;
+            transition: .3s;
+            box-shadow: 0 10px 40px rgba(255,255,255,.2);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-5px);
+            background: #ffb1c5;
+        }
+
+        /* =========================
+           FLOATING HEARTS
+        ========================= */
+
+        .heart {
+            position: fixed;
+            bottom: -30px;
+            font-size: 20px;
+            opacity: .7;
+            animation: floatUp linear forwards;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: .8;
+            }
+
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        .message-section {
+            min-height: 100vh;
+            padding: 120px 25px;
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(255,140,170,.12),
+                    transparent 35%
+                ),
+                #08111f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .message-container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .section-label {
+            color: #ff9eb5;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .message-title {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(40px, 6vw, 70px);
+            margin-bottom: 40px;
+        }
+
+        .letter {
+            padding: 45px;
+            border-radius: 25px;
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.12);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 30px 80px rgba(0,0,0,.25);
+        }
+
+        .letter p {
+            font-size: 18px;
+            line-height: 2;
+            color: rgba(255,255,255,.84);
+            margin-bottom: 22px;
+        }
+
+        .letter .highlight {
+            color: #ffb1c5;
+            font-weight: 700;
+        }
+
+        .signature {
+            margin-top: 35px;
+            font-family: "Playfair Display", serif;
+            font-size: 28px;
+            color: white;
+        }
+
+        /* =========================
+           CHECKLIST
+        ========================= */
+
+        .journey {
+            padding: 120px 25px;
+            background: #0c1728;
+        }
+
+        .journey-container {
+            max-width: 1100px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .cards {
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            padding: 35px 20px;
+            border-radius: 22px;
+            background: rgba(255,255,255,.05);
+            border: 1px solid rgba(255,255,255,.08);
+            transition: .3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            background: rgba(255,255,255,.08);
+        }
+
+        .card-icon {
+            font-size: 38px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .card p {
+            color: rgba(255,255,255,.6);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* =========================
+           FINAL
+        ========================= */
+
+        .final {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 25px;
+
+            background:
+                linear-gradient(
+                    rgba(5,12,23,.55),
+                    rgba(5,12,23,.9)
+                ),
+                url("https://images.unsplash.com/photo-1508964942454-1a56651d54ac?auto=format&fit=crop&w=2000&q=90");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .final-content {
+            max-width: 800px;
+        }
+
+        .final h2 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(45px, 7vw, 80px);
+            margin-bottom: 25px;
+        }
+
+        .final p {
+            font-size: 19px;
+            line-height: 1.9;
+            color: rgba(255,255,255,.8);
+        }
+
+        .big-heart {
+            font-size: 65px;
+            margin-top: 35px;
+            animation: heartbeat 1.4s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.18);
+            }
+        }
+
+        footer {
+            padding: 30px;
+            text-align: center;
+            background: #050b14;
+            color: rgba(255,255,255,.35);
+            font-size: 13px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .cards {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .letter {
+                padding: 28px;
+            }
+
+            .letter p {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content {
+                padding: 20px;
+            }
+
+            .hero-text {
+                font-size: 16px;
+            }
+
+            .start-btn {
+                padding: 14px 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="small-title">
+                The thing i want to send to my love
+            </div>
+
+            <h1>
+                Good luck, my love.</span> ❤️
+            </h1>
+
+            <p class="hero-text">
+                Chúc em có một hành trình thật đẹp
+                trong những ngày thực tập tại Singapore.
+            </p>
+
+            <a href="#message" class="start-btn">
+                Open my message ❤️
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MESSAGE
+    ========================= -->
+
+    <section class="message-section" id="message">
+
+        <div class="message-container">
+
+            <div class="section-label">
+                To my favorite person
+            </div>
+
+            <h2 class="message-title">
+                Gửi em yêu dấu của anh,
+            </h2>
+
+            <div class="letter">
+
+                <p>
+                    Vậy là em sắp bắt đầu một hành trình mới
+                    ở Singapore rồi. Xin chúc mừng nàng yêu của anh
+                    Một hành trình dài vừa háo hức, vừa có một chút
+                    lo lắng.
+                </p>
+
+                <p>
+                    Nhưng mà em đừng lo nhé. Sau tất cả,
+                    em đã cố gắng rất nhiều để có được cơ hội này,
+                    từ làm lại thẻ căn cước công dân, giấy tờ visa, thủ tục,....
+                    Nhưng nhờ đó cũng đã làm cho con người em yêu trở nên giày dặn và cứng cỏi hơn rất nhiều (anh rất yêu chuyến đi về 		    hạ long làm lại cccd hihi)
+                    Chúng mình đã có khoảng thời gian tuyệt vời bên nhau giờ đây đã đến lúc em có thể đi xa hơn rồi anh rất tự hào và 	            vui mừng cho em đó hãy tận dụng thật tốt cơ hội này nhé nó sẽ là bước ngoặt đối với em đó nàng yêu anh tin chắc là 		    vậy
+                </p>
+
+                <p>
+                    Có thể sẽ có những ngày mệt,
+                    có những lúc nhớ nhà và trên hết là phải nhớ anh đó nhé
+                    hoặc có những chuyện không diễn ra
+                    đúng như em mong muốn.
+                    Nhưng mỗi khi như thế,
+                    hãy nhớ rằng đôi khi trở ngại không nằm trên con đường ngáng chân em đi mà chính những trở ngại, những khó khăn ấy 		    sẽ trở thành con đường mà em sẽ bước tiếp nó yêu cầu em phải cứng cỏi hơn, rắn rỏi hơn nữa anh mong rằng em có thể 		    mạnh mẽ mà bước trên con đường đó và nhớ rằng ở đằng sau vẫn luôn có anh và bạn bè nhìn Hiển hôm chia tay mà xem 		    làm việc cả tối nhưng đến lúc về trông như sắp khóc =))) hehe anh và mọi người yêu quý và trân trọng em rất nhiều 		    đó bé. Mọi người luôn ủng hộ em,
+                    tin em và nhớ em rất nhiều.
+                </p>
+
+                <p>
+                    Anh không cần em phải kiếm được nhiều tiền hay về đi mua sắm hay haidilao gì cả hãy về và đem theo mình những câu 	            truyện thực tế em đã khó khăn và vượt qua ra sao em đã đối phó với ông khách khó tính như nào đối phó với sếp, đồng 		    nghiệp ra sao anh sẽ luôn ngưỡng mộ và tự hào vì em rất nhiều hehehehe. hoàn hảo.
+                    Anh chỉ mong em luôn khỏe,
+                    luôn vui và trở về sau chuyến đi này
+                    với thật nhiều kỷ niệm đẹp và những bài học.
+                </p>
+
+                <p>
+                    Good luck with your internship, baby.
+                    </span>
+                    Go show them what you can do.
+                    Anh tin em. ❤️
+                </p>
+
+                <div class="signature">
+                    Love,<br>
+                    Anh ❤️
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CHECKLIST
+    ========================= -->
+
+    <section class="journey">
+
+        <div class="journey-container">
+
+            <div class="section-label">
+                Your Singapore journey
+            </div>
+
+            <h2 class="message-title">
+                4 things I want for you
+            </h2>
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="card-icon">💼</div>
+
+                    <h3>Work hard</h3>
+
+                    <p>
+                        Học hỏi thật nhiều và
+                        tận dụng từng cơ hội.
+                    </p>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-icon">🫶</div>
+
+                    <h3>Stay healthy</h3>
+
+                    <p>
+                        Nhớ ăn uống đầy đủ,
+                        ngủ đủ và đừng làm việc quá sức.
+                    </p>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-icon">Enjoyment</div>
+
+                    <h3>Enjoy Singapore</h3>
+
+                    <p>
+                        Đi khám phá, chụp thật nhiều ảnh
+                        và tạo thật nhiều kỷ niệm.
+                    </p>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-icon">🏠</div>
+
+                    <h3>Come home safely</h3>
+
+                    <p>
+                        Điều quan trọng nhất:
+                        đi thật vui và trở về thật bình an.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FINAL MESSAGE
+    ========================= -->
+
+    <section class="final">
+
+        <div class="final-content">
+
+            <div class="section-label">
+                One last thing
+            </div>
+
+            <h2>
+                I believe in you.
+            </h2>
+
+            <p>
+                Cứ bước về phía trước nhé.
+                Anh sẽ luôn ở đây,
+                cổ vũ cho em từ xa. ❤️
+            </p>
+
+            <div class="big-heart">
+                ❤️
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        Made with love, just for you. 🇻🇳 → 🇸🇬
+    </footer>
+
+
+    <!-- =========================
+         FLOATING HEARTS SCRIPT
+    ========================= -->
+
+    <script>
+
+        function createHeart() {
+
+            const heart = document.createElement("div");
+
+            heart.className = "heart";
+
+            const hearts = ["❤️", "💕", "💗", "💖", "✨"];
+
+            heart.innerHTML =
+                hearts[Math.floor(Math.random() * hearts.length)];
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.animationDuration =
+                (5 + Math.random() * 6) + "s";
+
+            heart.style.fontSize =
+                (12 + Math.random() * 20) + "px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 12000);
+        }
+
+        setInterval(createHeart, 650);
+
+    </script>
+
+</body>
+</html>
