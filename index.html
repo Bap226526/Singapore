@@ -67,7 +67,7 @@
 
         .hero-content {
             position: relative;
-            z-index: 5;
+            z-index: 10;
             max-width: 850px;
             padding: 30px;
         }
@@ -121,16 +121,77 @@
         }
 
         /* =========================
+           FLOATING HEARTS
+        ========================= */
+
+        #heartLayer {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .floating-heart {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            font-size: 20px;
+            line-height: 1;
+            opacity: 0;
+            filter: drop-shadow(0 4px 10px rgba(255,105,145,.25));
+            animation: heartFloat var(--heart-duration) ease-in-out forwards;
+            will-change: transform, opacity;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, 20px, 0)
+                           rotate(-10deg)
+                           scale(.65);
+            }
+
+            12% {
+                opacity: .72;
+            }
+
+            50% {
+                opacity: .62;
+                transform: translate3d(var(--heart-drift), -50vh, 0)
+                           rotate(8deg)
+                           scale(1);
+            }
+
+            85% {
+                opacity: .45;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate3d(
+                    calc(var(--heart-drift) * -0.6),
+                    -115vh,
+                    0
+                )
+                rotate(-12deg)
+                scale(.75);
+            }
+        }
+
+        /* =========================
            FLOATING PHOTOS
         ========================= */
 
         .floating-photo {
             position: fixed;
-            width: 150px;
-            height: 150px;
+            width: 190px;
+            height: 190px;
             object-fit: cover;
-            border-radius: 18px;
-            z-index: 3;
+            border-radius: 22px;
+            z-index: 1;
             pointer-events: none;
             box-shadow: 0 12px 35px rgba(0,0,0,.4);
             border: 2px solid rgba(255,255,255,.65);
@@ -144,7 +205,10 @@
         @keyframes photoFloat {
             0% {
                 opacity: 0;
-                transform: translateY(40px) rotate(-8deg) scale(.85);
+                transform:
+                    translateY(40px)
+                    rotate(-8deg)
+                    scale(.85);
             }
 
             12% {
@@ -152,7 +216,10 @@
             }
 
             50% {
-                transform: translateY(-35px) rotate(5deg) scale(1);
+                transform:
+                    translateY(-35px)
+                    rotate(5deg)
+                    scale(1);
             }
 
             85% {
@@ -161,7 +228,10 @@
 
             100% {
                 opacity: 0;
-                transform: translateY(-180px) rotate(-7deg) scale(.92);
+                transform:
+                    translateY(-180px)
+                    rotate(-7deg)
+                    scale(.92);
             }
         }
 
@@ -213,6 +283,8 @@
         .message-container {
             max-width: 900px;
             width: 100%;
+            position: relative;
+            z-index: 10;
         }
 
         .section-label {
@@ -270,6 +342,8 @@
             max-width: 1100px;
             margin: auto;
             text-align: center;
+            position: relative;
+            z-index: 10;
         }
 
         .cards {
@@ -307,7 +381,6 @@
             font-size: 14px;
             line-height: 1.7;
         }
-
         /* =========================
            FINAL
         ========================= */
@@ -333,6 +406,8 @@
 
         .final-content {
             max-width: 800px;
+            position: relative;
+            z-index: 10;
         }
 
         .final h2 {
@@ -376,6 +451,7 @@
         ========================= */
 
         @media (max-width: 800px) {
+
             .cards {
                 grid-template-columns: 1fr 1fr;
             }
@@ -389,8 +465,9 @@
             }
 
             .floating-photo {
-                width: 120px;
-                height: 120px;
+                width: 145px;
+                height: 145px;
+                border-radius: 18px;
             }
         }
 
@@ -399,6 +476,7 @@
         ========================= */
 
         @media (max-width: 500px) {
+
             .cards {
                 grid-template-columns: 1fr;
             }
@@ -416,9 +494,9 @@
             }
 
             .floating-photo {
-                width: 105px;
-                height: 105px;
-                border-radius: 14px;
+                width: 115px;
+                height: 115px;
+                border-radius: 16px;
             }
 
             .music-button {
@@ -430,6 +508,9 @@
 </head>
 
 <body>
+
+    <!-- FLOATING HEARTS -->
+    <div id="heartLayer" aria-hidden="true"></div>
 
     <!-- MUSIC -->
     <audio id="bgMusic" loop preload="auto">
@@ -545,7 +626,6 @@
         </div>
 
     </section>
-
     <!-- CHECKLIST -->
     <section class="journey">
 
@@ -679,6 +759,143 @@
 
 
         /* =========================
+           FLOATING HEARTS ❤️
+        ========================= */
+
+        const heartLayer = document.getElementById("heartLayer");
+
+        const heartIcons = [
+            "❤️",
+            "💕",
+            "💗",
+            "💖",
+            "💓"
+        ];
+
+        function createFloatingHeart() {
+
+            const heart = document.createElement("div");
+
+            heart.className = "floating-heart";
+
+            heart.textContent =
+                heartIcons[
+                    Math.floor(
+                        Math.random() * heartIcons.length
+                    )
+                ];
+
+            /*
+             * Cho trái tim xuất hiện chủ yếu
+             * ở hai bên màn hình.
+             */
+
+            const side =
+                Math.random() < 0.5
+                    ? "left"
+                    : "right";
+
+            let x;
+
+            if (window.innerWidth >= 1200) {
+
+                x = 3 + Math.random() * 14;
+
+            } else if (window.innerWidth >= 800) {
+
+                x = 2 + Math.random() * 10;
+
+            } else {
+
+                x = 2 + Math.random() * 7;
+            }
+
+            heart.style[side] = x + "vw";
+
+            heart.style.bottom = "-40px";
+
+
+            /*
+             * Kích thước ngẫu nhiên
+             */
+
+            const size =
+                14 + Math.random() * 13;
+
+
+            /*
+             * Tốc độ ngẫu nhiên
+             */
+
+            const duration =
+                7 + Math.random() * 5;
+
+
+            /*
+             * Độ bay ngang
+             */
+
+            const drift =
+                (Math.random() < 0.5 ? -1 : 1) *
+                (25 + Math.random() * 55);
+
+
+            heart.style.fontSize =
+                size + "px";
+
+
+            heart.style.setProperty(
+                "--heart-duration",
+                duration + "s"
+            );
+
+
+            heart.style.setProperty(
+                "--heart-drift",
+                drift + "px"
+            );
+
+
+            heartLayer.appendChild(heart);
+
+
+            /*
+             * Xóa trái tim sau khi
+             * animation kết thúc.
+             */
+
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000 + 300);
+        }
+
+
+        /*
+         * Tạo sẵn một vài trái tim
+         * khi trang vừa mở.
+         */
+
+        for (let i = 0; i < 7; i++) {
+
+            setTimeout(
+                createFloatingHeart,
+                i * 850
+            );
+        }
+
+
+        /*
+         * Sau đó cứ 1.5 giây
+         * xuất hiện thêm một trái tim.
+         */
+
+        setInterval(
+            createFloatingHeart,
+            1500
+        );
+
+
+        /* =========================
            49 FLOATING PHOTOS
            10 PHOTOS PER BATCH
         ========================= */
@@ -736,70 +953,191 @@
         ];
 
         const PHOTOS_PER_BATCH = 10;
+
         const PHOTO_INTERVAL = 2500;
+
         const BATCH_PAUSE = 4000;
+
         const PHOTO_LIFETIME = 7000;
 
         let currentPhotoIndex = 0;
 
+
         function createPhoto(src) {
-            const img = document.createElement("img");
 
-            img.className = "floating-photo";
+            const img =
+                document.createElement("img");
+
+            img.className =
+                "floating-photo";
+
             img.src = src;
-            img.alt = "Memory ❤️";
 
-            /* Nếu file ảnh bị thiếu thì tự xóa,
-               không để hiện icon ảnh lỗi */
+            img.alt =
+                "Memory ❤️";
+
+
+            /*
+             * Nếu ảnh bị thiếu,
+             * tự động xóa ảnh lỗi.
+             */
+
             img.onerror = function () {
                 img.remove();
             };
 
-            const maxLeft = Math.max(5, window.innerWidth - 175);
-            const left = 5 + Math.random() * (maxLeft - 5);
 
-            const bottom = 8 + Math.random() * 65;
-            const rotation = -12 + Math.random() * 24;
-            const scale = 0.88 + Math.random() * 0.25;
+            /*
+             * Ảnh chỉ xuất hiện
+             * chủ yếu ở LEFT / RIGHT.
+             */
 
-            img.style.left = left + "px";
-            img.style.bottom = bottom + "vh";
+            const side =
+                Math.random() < 0.5
+                    ? "left"
+                    : "right";
+
+            let horizontalPosition;
+
+
+            if (window.innerWidth >= 1200) {
+
+                horizontalPosition =
+                    2 + Math.random() * 12;
+
+            } else if (window.innerWidth >= 800) {
+
+                horizontalPosition =
+                    2 + Math.random() * 8;
+
+            } else {
+
+                horizontalPosition =
+                    1 + Math.random() * 5;
+            }
+
+
+            img.style[side] =
+                horizontalPosition + "vw";
+
+
+            /*
+             * Không cho ảnh sát
+             * mép trên / dưới.
+             */
+
+            img.style.bottom =
+                (12 + Math.random() * 65) + "vh";
+
+
+            /*
+             * Xoay và phóng to nhẹ
+             * ngẫu nhiên.
+             */
+
+            const rotation =
+                -10 + Math.random() * 20;
+
+            const scale =
+                0.92 + Math.random() * 0.18;
+
+
             img.style.transform =
                 `rotate(${rotation}deg) scale(${scale})`;
 
+
             document.body.appendChild(img);
+
+
+            /*
+             * Ảnh tồn tại 7 giây
+             * rồi biến mất.
+             */
 
             setTimeout(() => {
                 img.remove();
             }, PHOTO_LIFETIME);
         }
-
         async function runPhotoBatches() {
 
             while (true) {
 
-                for (let i = 0; i < PHOTOS_PER_BATCH; i++) {
+                /*
+                 * Mỗi batch có 10 ảnh.
+                 * Mỗi ảnh xuất hiện cách nhau 2.5 giây.
+                 */
 
-                    if (currentPhotoIndex >= photos.length) {
+                for (
+                    let i = 0;
+                    i < PHOTOS_PER_BATCH;
+                    i++
+                ) {
+
+                    /*
+                     * Khi chạy hết p49,
+                     * quay lại p1.
+                     */
+
+                    if (
+                        currentPhotoIndex >= photos.length
+                    ) {
                         currentPhotoIndex = 0;
                     }
 
-                    createPhoto(photos[currentPhotoIndex]);
+
+                    /*
+                     * Tạo ảnh hiện tại.
+                     */
+
+                    createPhoto(
+                        photos[currentPhotoIndex]
+                    );
+
+
+                    /*
+                     * Sang ảnh tiếp theo.
+                     */
 
                     currentPhotoIndex++;
 
+
+                    /*
+                     * Chờ 2.5 giây
+                     * trước khi xuất hiện ảnh tiếp theo.
+                     */
+
                     await new Promise(resolve =>
-                        setTimeout(resolve, PHOTO_INTERVAL)
+                        setTimeout(
+                            resolve,
+                            PHOTO_INTERVAL
+                        )
                     );
                 }
 
+
+                /*
+                 * Đã xong 10 ảnh.
+                 *
+                 * Nghỉ 4 giây trước khi
+                 * bắt đầu batch 10 ảnh tiếp theo.
+                 */
+
                 await new Promise(resolve =>
-                    setTimeout(resolve, BATCH_PAUSE)
+                    setTimeout(
+                        resolve,
+                        BATCH_PAUSE
+                    )
                 );
             }
         }
 
+
+        /*
+         * Bắt đầu hệ thống ảnh.
+         */
+
         runPhotoBatches();
+
     </script>
 
 </body>
